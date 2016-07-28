@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /* Data that will be written to file output. */
 typedef struct FileStructure{
@@ -23,9 +24,18 @@ typedef struct FileStructure{
     char *file_name;
 } FileStructure;
 
+typedef enum{
+    BC_TYPE,
+    IC_TYPE,
+    EQUATION_TYPE,
+    SOLUTION_METHOD,
+    TIME,
+    
+} Options;
+
 int run(void);
-int user_interface(FileStructure &FileS, int *choices);
-int menu(FileStructure FileStruct);
+int user_interface(FileStructure *FileS, int *choices);
+void menu(void);
 
 #endif /* INTERFACE_H */
 
