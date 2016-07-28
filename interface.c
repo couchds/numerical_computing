@@ -14,7 +14,6 @@ User inputs the parameters of the differential equation they are solving.
 
 // filler variable for initialization
 #define ARBITRARY 255
-
 #define QUIT 7
 // represents invalid choice by user.
 #define INVALID -10
@@ -25,7 +24,9 @@ User inputs the parameters of the differential equation they are solving.
 
 int get_input(void);
 
-int user_interface(FileStructure *FileS, int *choices){
+int user_interface(void){
+    int *choices = malloc(5);
+    FileStructure *FileS;
     bool quit = false;
     int choice;
     choice = ARBITRARY;
@@ -33,9 +34,12 @@ int user_interface(FileStructure *FileS, int *choices){
     printf("Starting user interface...\n");
 #endif
     while (!quit) {
+        printf("HERE\n");
+        display_choices(FileS);
+        menu();
         choice = get_input();
         if (choice != INVALID) {
-            process_option(choice);
+            process_option(FileS, choice);
         }
         if (choice == QUIT) {
             quit = true;
@@ -65,7 +69,7 @@ int process_option(FileStructure *FileS, int choice){
             scanf("%d\n", &equation_type_choice);
             FileS->equation_type = equation_type_choice;
             break;
-        case SOLUTION_METHOD:
+        case METHOD:
             ;
             int solution_method_choice;
             printf("Enter:\n 1 for finite-difference method\n");
@@ -78,6 +82,10 @@ int process_option(FileStructure *FileS, int choice){
             scanf("Enter time: %lf", &time_choice);
             FileS->time = time_choice;
             break;
+        case GENERATE:
+            ;
+        case EXIT:
+            return EXIT_CODE;
         default:
             break;
     }
@@ -85,31 +93,36 @@ int process_option(FileStructure *FileS, int choice){
 
 int get_input(void){
     // just a random number.
-    int choice;
-    choice = ARBITRARY;
-    if (choice <= 7 && choice > 0 && (sizeof(choice) == 2))
+    int user_choice;
+    printf("Enter choice:\n");
+    scanf("%d", &user_choice);
+    if ((user_choice <= 7) && (user_choice > 0))
     {
-        return choice;
+        return user_choice;
     }
     else{
-        printf("The value %d is an invalid choice\n", choice);
+        printf("The value %d is an invalid choice\n", user_choice);
         return INVALID;
     }
 }
 
+void display_choices(FileStructure *FileS){
+    if (FileS->bc_type) {
+        printf("BC TYPE: %d\n", FileS->bc_type);
+    }
+}
 
 void menu(void){
     printf("1. Modify boundary conditions.\n");
     printf("2. Modify initial conditions.\n");
     printf("3. Modify PDE.\n");
-    printf("4. Set runtime.\n");
-    printf("5. Select numerical method.\n");
+    printf("4. Select numerical method.\n");
+    printf("5. Set runtime.\n");
     printf("6. Generate job submission.\n");
     printf("7. Exit\n");
 }
 
 // Create the txt file containing the information for the equation.
 int write_to_output(FileStructure *OutputFile;){
-    // LINE 1: BC
     return 0;
 }

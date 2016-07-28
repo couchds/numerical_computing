@@ -102,6 +102,7 @@ int main(int argc, char *argv[]){
     if (option == INTERFACE_OPTION) {
         //
 	printf("Running interface.\n");
+        user_interface();
         ;
     }
     if (option == COMPUTATION_OPTION) {

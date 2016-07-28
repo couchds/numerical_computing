@@ -25,17 +25,20 @@ typedef struct FileStructure{
 } FileStructure;
 
 typedef enum{
-    BC_TYPE,
-    IC_TYPE,
-    EQUATION_TYPE,
-    SOLUTION_METHOD,
-    TIME,
-    
+    BC_TYPE=1,
+    IC_TYPE=2,
+    EQUATION_TYPE=3,
+    METHOD=4,
+    TIME=5,
+    GENERATE=6,
+    EXIT=7
 } Options;
 
 int run(void);
-int user_interface(FileStructure *FileS, int *choices);
+int user_interface(void);
 void menu(void);
+int process_option(FileStructure *FileS, int choice);
+void display_choices(FileStructure *FileS);
 
 #endif /* INTERFACE_H */
 
