@@ -16,4 +16,4 @@ main.o: main.c
 	$(CC) $(CFLAGS) main.c -o main.o
 
 clean:
-	rm *.o *.out numerical_computing
+	rm *.o *.out NC
